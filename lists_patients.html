@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>All Patients</title>
+</head>
+<body>
+  <h1>All Patients</h1>
+  <ul id="patientList"></ul>
+
+  <script>
+    async function fetchPatients() {
+      const response = await fetch('http://your-backend-url/api/patients');
+      const patients = await response.json();
+      const list = document.getElementById('patientList');
+      patients.forEach(patient => {
+        const li = document.createElement('li');
+        li.textContent = `ID: ${patient.id}, Name: ${patient.name}, Age: ${patient.age}, Gender: ${patient.gender}`;
+        list.appendChild(li);
+      });
+    }
+
+    fetchPatients();
+  </script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Schedule Appointment</title>
+</head>
+<body>
+  <h1>Schedule New Appointment</h1>
+  <form id="appointmentForm">
+    <label>Patient ID: <input type="text" name="patientId" required></label><br>
+    <label>Date: <input type="date" name="date" required></label><br>
+    <label>Time: <input type="time" name="time" required></label><br>
+    <button type="submit">Schedule</button>
+  </form>
+
+  <script>
+    document.getElementById('appointmentForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      const data = Object.fromEntries(formData.entries());
+      const response = await fetch('http://your-backend-url/api/appointments', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      if (response.ok) alert("Appointment scheduled!");
+      else alert("Error scheduling appointment");
+    });
+  </script>
+</body>
+</html>

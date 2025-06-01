@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Add New Patient</title>
+</head>
+<body>
+  <h1>Add New Patient</h1>
+  <form id="patientForm">
+    <label>Name: <input type="text" name="name" required></label><br>
+    <label>Age: <input type="number" name="age" required></label><br>
+    <label>Gender: 
+      <select name="gender">
+        <option>Male</option>
+        <option>Female</option>
+      </select>
+    </label><br>
+    <button type="submit">Add Patient</button>
+  </form>
+
+  <script>
+    document.getElementById('patientForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      const data = Object.fromEntries(formData.entries());
+      const response = await fetch('http://your-backend-url/api/patients', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      if (response.ok) alert("Patient added!");
+      else alert("Error adding patient");
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+  <!DOCTYPE html>
+<html>
+<head>
+  <title>All Appointments</title>
+</head>
+<body>
+  <h1>All Appointments</h1>
+  <ul id="appointmentList"></ul>
+
+  <script>
+    async function fetchAppointments() {
+      const response = await fetch('http://your-backend-url/api/appointments');
+      const appointments = await response.json();
+      const list = document.getElementById('appointmentList');
+      appointments.forEach(appointment => {
+        const li = document.createElement('li');
+        li.textContent = `ID: ${appointment.id}, PatientID: ${appointment.patientId}, Date: ${appointment.date}, Time: ${appointment.time}`;
+        list.appendChild(li);
+      });
+    }
+
+    fetchAppointments();
+  </script>
+</body>
+</html>
